@@ -304,6 +304,9 @@ def create_entries(data: Dict[str, Any]) -> List[Entry]:
 
 
 def run() -> None:
+    # Change the working directory to the project path
+    os.chdir(os.environ["INPUT_PROJECT_PATH"])
+
     # Process ignore list of Rustsec IDs
     ignore_args = []
     ignores = os.environ["INPUT_IGNORE"].split(",")

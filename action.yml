@@ -22,6 +22,10 @@ inputs:
     description: Create/Update issues for each found vulnerability.
     required: false
     default: "${{ github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main' }}"
+  projectPath:
+    description: Project workspace path if not at top level.
+    required: false
+    default: "."
 
 runs:
   using: composite
@@ -46,6 +50,7 @@ runs:
         audit.run()
       shell: python
       env:
+        INPUT_PROJECT_PATH: ${{ inputs.projectPath }}
         INPUT_CREATE_ISSUES: ${{ inputs.createIssues }}
         INPUT_DENY_WARNINGS: ${{ inputs.denyWarnings }}
         INPUT_IGNORE: ${{ inputs.ignore }}
